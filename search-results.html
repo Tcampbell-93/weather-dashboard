@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/search-results.css" />
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <aside>
+        <form id="search-form">
+            <h2>Search for another city:</h2>
+            <input id="search-input" type="text" placeholder="Search here"> <br>
+            <button class="search-button">Search</button>
+        </form>
+        <button id="go-back" href="./index.html">&larr; Go back.</button>
+        <div class="cities-searched">
+        </div>
+    </aside>
+
+    <div>
+        <h2>Current forcast for <span id="result-text"></span></h2>
+        <div id="result-content"></div>
+    </div>
+    
+    <script src="https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2"></script>
+    <script src="./assets/js/search-results.js"></script>
+</body>
+</html>

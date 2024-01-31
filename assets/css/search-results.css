@@ -1,0 +1,64 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+header {
+    background-color: rgb(151, 9, 9);
+    color: rgba(255, 255, 255, 0.911);
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+aside {
+    float: left;
+    border-right: solid black 1px;
+    margin-top: 20px;
+}
+
+aside form h2 {
+    margin: 10px;
+}
+
+#search-input {
+    width: 90%;
+    margin: 10px;
+    height: 40px;
+    font-size: large;
+}
+
+.search-button {
+    width: 25%;
+    margin: 10px;
+    height: 40px;
+    font-size: large;
+}
+
+#go-back {
+    width: 50%;
+    margin: 10px;
+    font-size: large;
+}
+
+div h2 {
+    margin-left: 35%;
+    margin-top: 20px;
+}
+
+#result-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.card {
+    flex-direction: column;
+    background-color: rgb(211, 210, 208);
+    padding: 15px;
+}
+
+.card-date {
+    text-align: center;
+}
