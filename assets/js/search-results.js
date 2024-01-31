@@ -4,18 +4,24 @@ var searchFormEl = document.querySelector('#search-form');
 var citiesSearched = document.querySelector('.cities-searched');
 var searchButtonEl = document.querySelector('.search-button');
 
+
+function init () {
+    getSavedSearches();
+}
+
 function getParamater() {
     var searchParamsArr = document.location.search.split('=');
 
     var query = searchParamsArr[1];
     searchApi(query);
-    getSavedSearches();
 }
 
 function searchApi (query) {
     var apiKey = "46ebca62a4923b052a4202a74356e91a";        // my personal api key
     var locQueryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" 
     + query + "&appid=" + apiKey + "&units=imperial";       // making the url for the query
+
+    saveSearches(query);
 
     fetch(locQueryUrl)
         .then(function (response) {
@@ -86,8 +92,19 @@ function getWeatherIcon (weatherIcon) {
     return icon;
 }
 
-function saveSearches (query) {
-    localStorage.setItem('cities', JSON.stringify(query));
+function saveSearches(query) {
+    var storedCities = localStorage.getItem('cities');
+    var cities = [];
+  
+    if (storedCities !== null) {
+      cities = JSON.parse(storedCities);
+      if (!Array.isArray(cities)) {
+        cities = [];
+      }
+    }
+  
+    cities.push(query);
+    localStorage.setItem('cities', JSON.stringify(cities));
 }
 
 function getSavedSearches () {
@@ -98,24 +115,38 @@ function getSavedSearches () {
         storedCities = [];
     }
     citiesSearched.innerHTML = '';
+
+    storedCities.forEach(function(storedCities) {
     var savedCities = document.createElement('button');
     savedCities.classList.add('saved-cities');
     savedCities.textContent = storedCities;
+    function reSearchCity (event) {
+        event.preventDefault();
+        searchValue = savedCities.textContent;
+        searchApi(searchValue);
+    }
+    savedCities.addEventListener('click', reSearchCity);
     
 
     citiesSearched.appendChild(savedCities);
+    });
 }
 
 function handleSearchForm (event) {
     event.preventDefault();
 
-    searchInputVal = document.getElementById('search-input').value;
-    if (!searchInputVal) {
+    searchInputValue = document.querySelector('#search-input').value;
+    if (!searchInputValue) {
         console.error("You need a search input value.");
         return;
     }
     
-    getParamater(searchInputVal);
+    searchApi(searchInputValue);
+}
+
+function reSearchCity (event) {
+    event.preventDefault();
+    searchApi(searchValue);
 }
 
 searchButtonEl.addEventListener('click', handleSearchForm);

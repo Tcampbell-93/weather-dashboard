@@ -35,12 +35,6 @@ aside form h2 {
     font-size: large;
 }
 
-#go-back {
-    width: 50%;
-    margin: 10px;
-    font-size: large;
-}
-
 div h2 {
     margin-left: 35%;
     margin-top: 20px;
@@ -61,4 +55,11 @@ div h2 {
 
 .card-date {
     text-align: center;
+}
+
+.saved-cities {
+    display: block;
+    margin: 10px;
+    background-color: rgb(187, 5, 5);
+    color:antiquewhite;
 }
