@@ -10,7 +10,6 @@ function getParamater() {
     var query = searchParamsArr[1];
     searchApi(query);
     getSavedSearches();
-    saveSearches(query);
 }
 
 function searchApi (query) {
@@ -110,7 +109,7 @@ function getSavedSearches () {
 function handleSearchForm (event) {
     event.preventDefault();
 
-    searchInputVal = document.querySelector('#search-input').value;
+    searchInputVal = document.getElementById('search-input').value;
     if (!searchInputVal) {
         console.error("You need a search input value.");
         return;
