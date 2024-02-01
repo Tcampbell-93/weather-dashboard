@@ -4,13 +4,8 @@ var searchFormEl = document.querySelector('#search-form');
 var citiesSearched = document.querySelector('.cities-searched');
 var searchButtonEl = document.querySelector('.search-button');
 
-
-function init () {
-    getSavedSearches();
-}
-
 function getParamater() {
-    var searchParamsArr = document.location.search.split('=');
+    var searchParamsArr = document.location.search.split('=');      // getting the city from the first page to be 
 
     var query = searchParamsArr[1];
     searchApi(query);
@@ -38,7 +33,7 @@ function searchApi (query) {
                 resultContentEl.innerHTML = "<h2>No results for this city.</h2>";
             } else {
                 resultContentEl.textContent = '';
-                for (var i = 6; i < resp.list.length; i += 8) {     // itterating through every 8th entry to get weather at noon each day
+                for (var i = 6; i < resp.list.length; i += 8) {     // itterating through every 6th entry to get weather at noon each day
                     printResults(resp.list[i]);
                 }
             }
@@ -64,19 +59,19 @@ function printResults(resultObj) {
     cardDate.textContent = date;
 
     var weatherIcon = resultObj.weather[0].icon;
-    var iconUrl = getWeatherIcon(weatherIcon);
+    var iconUrl = getWeatherIcon(weatherIcon);      // getting the icon images for the weather cards
 
     var iconImg = document.createElement('img');
     iconImg.src = iconUrl;
 
     var temp = document.createElement('div');
-    temp.textContent = "Temperature: " + resultObj.main.temp + "\u00B0 F";
+    temp.textContent = "Temperature: " + resultObj.main.temp + "\u00B0 F";      // adding temperature to card
 
     var humidity = document.createElement('div');
-    humidity.textContent = 'Humidity: ' + resultObj.main.humidity + "%";
+    humidity.textContent = 'Humidity: ' + resultObj.main.humidity + "%";        // adding humidity to card
 
     var windSpeed = document.createElement('div');
-    windSpeed.textContent = 'Wind: ' + resultObj.wind.speed + ' mph';
+    windSpeed.textContent = 'Wind: ' + resultObj.wind.speed + ' mph';       // adding wind speed to card
 
     weatherBody.append(cardDate);
     weatherBody.append(iconImg);
@@ -84,16 +79,16 @@ function printResults(resultObj) {
     weatherBody.append(humidity);
     weatherBody.append(windSpeed);
     weatherCard.append(weatherBody);
-    resultContentEl.append(weatherCard);
+    resultContentEl.append(weatherCard);        // appending all the information to the cards then onto the page
 }
 
 function getWeatherIcon (weatherIcon) {
-    var icon = 'https://openweathermap.org/img/wn/' + weatherIcon + "@2x.png";
+    var icon = 'https://openweathermap.org/img/wn/' + weatherIcon + "@2x.png";      // function to get the weather icons
     return icon;
 }
 
 function saveSearches(query) {
-    var storedCities = localStorage.getItem('cities');
+    var storedCities = localStorage.getItem('cities');      // function to save the searches made by the user
     var cities = [];
   
     if (storedCities !== null) {
@@ -116,7 +111,7 @@ function getSavedSearches () {
     }
     citiesSearched.innerHTML = '';
 
-    storedCities.forEach(function(storedCities) {
+    storedCities.forEach(function(storedCities) {               // getting the saved items from local storage and turning them into buttons
         var savedCities = document.createElement('button');
         savedCities.classList.add('saved-cities');
         savedCities.textContent = storedCities;
@@ -135,18 +130,13 @@ function getSavedSearches () {
 function handleSearchForm (event) {
     event.preventDefault();
 
-    searchInputValue = document.querySelector('#search-input').value;
+    searchInputValue = document.querySelector('#search-input').value;       
     if (!searchInputValue) {
         console.error("You need a search input value.");
         return;
     }
     
     searchApi(searchInputValue);
-}
-
-function reSearchCity (event) {
-    event.preventDefault();
-    searchApi(searchValue);
 }
 
 searchButtonEl.addEventListener('click', handleSearchForm);

@@ -13,7 +13,7 @@ function handleSearchForm (event) {
 
     var queryString = './search-results.html?q=' + searchInputVal;
 
-    location.assign(queryString); 
+    location.assign(queryString);       // redirects you to next page with added query
 }
 
 searchButton.addEventListener('click', handleSearchForm);
