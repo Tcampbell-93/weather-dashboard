@@ -117,13 +117,13 @@ function getSavedSearches () {
     citiesSearched.innerHTML = '';
 
     storedCities.forEach(function(storedCities) {
-    var savedCities = document.createElement('button');
-    savedCities.classList.add('saved-cities');
-    savedCities.textContent = storedCities;
-    function reSearchCity (event) {
-        event.preventDefault();
-        searchValue = savedCities.textContent;
-        searchApi(searchValue);
+        var savedCities = document.createElement('button');
+        savedCities.classList.add('saved-cities');
+        savedCities.textContent = storedCities;
+        function reSearchCity (event) {
+            event.preventDefault();
+            searchValue = savedCities.textContent;
+            searchApi(searchValue);
     }
     savedCities.addEventListener('click', reSearchCity);
     
