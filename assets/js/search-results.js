@@ -17,6 +17,7 @@ function searchApi (query) {
     + query + "&appid=" + apiKey + "&units=imperial";       // making the url for the query
 
     saveSearches(query);
+    getSavedSearches();     // gets the saved searches and updates them dynamically
 
     fetch(locQueryUrl)
         .then(function (response) {
